@@ -65,7 +65,10 @@
 }
 
 .@{class-prefix}-main-content-wrapper {
-  padding: @layout-main-content-padding @layout-main-content-padding 0;
+  // padding: @layout-main-content-padding @layout-main-content-padding 0;
+  top:0;
+  left:0;
+  padding: @layout-main-content-padding 16px 0;
   flex: 1;
 
   @media screen and (max-width: @screen-xs-max) {
@@ -102,8 +105,8 @@
 }
 
 .@{class-prefix}-main-content {
-  .flex-display(flex, column, nowrap);
-  flex: 1;
+  // .flex-display(flex, column, nowrap);
+  // flex: 1;
   height: 100%;
 }
 

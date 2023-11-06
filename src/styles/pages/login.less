@@ -72,8 +72,10 @@
 
 .@{class-prefix}-app-login-container {
   position: relative;
-  max-width: 680px;
-  width: 94%;
+  // max-width: 680px;
+  // width: 94%;
+  max-width: 1000px;
+  width: 100%;
   margin: 0 auto;
 
   @media screen and (max-width: @screen-xs-max) {
@@ -101,17 +103,18 @@
 }
 
 .@{class-prefix}-app-login-content {
-  padding: 35px 35px 20px;
-  width: 60%;
+  padding: 35px 51px 20px;
+  // width: 60%;
+  width: 50%;
 
-  & .ant-input {
-    background-color: @grey-3;
+  // & .ant-input {
+  //   background-color: @grey-3;
 
-    &:focus {
-      box-shadow: none;
-      border-color: @primary-color;
-    }
-  }
+  //   &:focus {
+  //     box-shadow: none;
+  //     border-color: @primary-color;
+  //   }
+  // }
 
   & .@{class-prefix}-btn {
     padding: 6px 35px !important;
@@ -142,11 +145,13 @@
 
 .@{class-prefix}-app-logo-content {
   color: @white-color;
-  padding: 35px 35px 20px;
-  width: 40%;
+  //padding: 35px 35px 11px;
+  width: 50%;
+ // width: 40%;
   position: relative;
   overflow: hidden;
-  .flex-display(flex, column, nowrap);
+  //.flex-display(flex,column, nowrap);
+  .flex-display(flex, nowrap);
 
   & > * {
     position: relative;
