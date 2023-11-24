@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Avatar, Popover, message } from "antd";
-// import { useHistory } from "react-router";
+import { useHistory } from "react-router";
 import styles from "./UserProfile.module.css";
 import user_image from "../../assets/pictures/user_image.jpg";
 
 const UserProfile = () => {
   // CONSTANTS
-  // const history = useHistory();
+  const history = useHistory();
 
   // STATE
   const [open, setOpen] = useState<boolean>(false);
@@ -19,10 +19,14 @@ const UserProfile = () => {
 
   const handleAbout = () => {
     hide();
-    // history.push("/");
+    history.push("/about");
   };
 
   const handleLogOut = () => {
+    /* 
+    - destroy any active messages.
+    - on logout expire the token, an event listener is added in MainApp to re-route to signIn page.
+    */
     message.destroy();
     localStorage.clear();
     message.destroy();
@@ -32,7 +36,7 @@ const UserProfile = () => {
 
   /* navigate to coming soon page */
   const handleAccount = () => {
-    // history.push("/");
+    history.push("/myprofile");
   };
 
   const userMenuOptions = (
@@ -58,28 +62,18 @@ const UserProfile = () => {
     </ul>
   );
   const changePassword = () => {
-    // history.push(`/`);
+    // let id = userInformation.UserId;
+    // history.push(`/users/updatepassword/${id}`);
+    history.push(`/changepassword`);
   };
   const hide = () => {
     setOpen(false);
   };
 
   return (
-    <div
-      className={`gx-flex-row gx-align-items-center gx-mb-4 gx-avatar-row ${styles["user-profile"]}`}
-    >
-      <Popover
-        placement="bottomRight"
-        content={userMenuOptions}
-        trigger="click"
-        open={open}
-        onOpenChange={handleOpenChange}
-      >
-        <Avatar
-          src={user_image}
-          className="gx-size-40 gx-pointer gx-mr-3"
-          alt=""
-        />
+    <div className={`gx-flex-row gx-align-items-center gx-mb-4 gx-avatar-row ${styles["user-profile"]}`}>
+      <Popover placement="bottomRight" content={userMenuOptions} trigger="click" open={open} onOpenChange={handleOpenChange}>
+        <Avatar src={user_image} className="gx-size-40 gx-pointer gx-mr-3" alt="" />
         <span className={`gx-avatar-name ${styles["username"]}`}>
           user
           <i className="icon icon-chevron-down gx-fs-xxs gx-ml-2" />

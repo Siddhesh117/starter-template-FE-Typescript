@@ -1,30 +1,24 @@
 import UserProfile from "./UserProfile";
 import { Layout } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  NAV_STYLE_DRAWER,
-  NAV_STYLE_FIXED,
-  NAV_STYLE_MINI_SIDEBAR,
-  TAB_SIZE,
-} from "../../constants/ThemeSetting";
+import { NAV_STYLE_DRAWER, NAV_STYLE_FIXED, NAV_STYLE_MINI_SIDEBAR, TAB_SIZE } from "../../constants/ThemeSetting";
 import { toggleCollapsedSideNav } from "../../appRedux/actions";
 import styles from "./index.module.css";
 import type { RootState } from "../../appRedux/store/index";
+import adani_logo from "../../assets/pictures/adani_logo.png";
+import { useHistory } from "react-router-dom";
 
 const { Header } = Layout;
 
 const Topbar = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { navStyle } = useSelector(({ settings }: RootState) => settings);
-  const { navCollapsed, width } = useSelector(
-    ({ common }: RootState) => common
-  );
+  const { navCollapsed, width } = useSelector(({ common }: RootState) => common);
 
   return (
     <Header>
-      {navStyle === NAV_STYLE_DRAWER ||
-      ((navStyle === NAV_STYLE_FIXED || navStyle === NAV_STYLE_MINI_SIDEBAR) &&
-        width < TAB_SIZE) ? (
+      {navStyle === NAV_STYLE_DRAWER || ((navStyle === NAV_STYLE_FIXED || navStyle === NAV_STYLE_MINI_SIDEBAR) && width < TAB_SIZE) ? (
         <div className="gx-linebar gx-mr-3">
           <i
             className="gx-icon-btn icon icon-menu"
@@ -35,21 +29,19 @@ const Topbar = () => {
         </div>
       ) : null}
       <div className={styles["topbar"]}>
-        {!navCollapsed &&
-          // <img
-          //   alt="adani_logo"
-          //   src={adani_logo}
-          //   style={{
-          //     width: "90px",
-          //     cursor: "pointer",
-          //   }}
-          //   onClick={() => history.push(`/`)}
-          // />
-          ""}
+        {!navCollapsed && (
+          <img
+            alt="adani_logo"
+            src={adani_logo}
+            style={{
+              width: "90px",
+              cursor: "pointer"
+            }}
+            onClick={() => history.push(`/`)}
+          />
+        )}
 
-        <div
-          style={{ display: "flex", justifyContent: "flex-end", width: "100%" }}
-        >
+        <div style={{ display: "flex", justifyContent: "flex-end", width: "100%" }}>
           <UserProfile />
         </div>
       </div>

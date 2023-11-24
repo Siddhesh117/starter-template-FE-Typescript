@@ -9,37 +9,38 @@ import type { RootState } from "../../appRedux/store";
 type SidebarContentProps = {
   sidebarCollapsed: boolean;
   setSidebarCollapsed: Dispatch<SetStateAction<boolean>>;
+  userData: any;
 };
 
 type MenuItem = Required<MenuProps>["items"][number];
 
-const getItem = (
-  label: React.ReactNode,
-  key: React.Key,
-  icon?: React.ReactNode,
-  children?: MenuItem[],
-  type?: "group"
-): MenuItem => {
+const getItem = (label: React.ReactNode, key: React.Key, icon?: React.ReactNode, children?: MenuItem[], type?: "group"): MenuItem => {
   return {
     key,
     icon,
     children,
     label,
-    type,
+    type
   } as MenuItem;
 };
 
 /* utility function */
+
+const generateGeneralSettings = () => {
+  const settings: Array<MenuItem> = [];
+
+  settings.push(getItem("User Management", "user-management"));
+  settings.push(getItem("Master Management", "master-management"));
+
+  return getItem("Settings", "settings", <i className="icon icon-setting" />, settings);
+};
 
 const generateHomeSettings = () => {
   /* main-icon/item for all these sub-menu items */
   return getItem("Dashboard", "home", <i className="icon icon-home" />);
 };
 
-const SidebarContent = ({
-  sidebarCollapsed,
-  setSidebarCollapsed,
-}: SidebarContentProps) => {
+const SidebarContent = ({ sidebarCollapsed, setSidebarCollapsed, userData }: SidebarContentProps) => {
   const history = useHistory();
   const { themeType } = useSelector(({ settings }: RootState) => settings);
   const pathname = useSelector(({ common }: RootState) => common.pathname);
@@ -49,32 +50,27 @@ const SidebarContent = ({
   const handleOnClick: MenuProps["onClick"] = (menuItem) => {
     const keyPath = menuItem.keyPath.at(0);
     if (keyPath === "home") return history.push("/home");
+    if (keyPath === "user-management") return history.push("/user/list");
+    if (keyPath === "master-management") return history.push("/master-management");
+    if (keyPath === "tagless-list") return history.push("/tagless-list");
 
+    /* If no keypath found then move to coming-soon page */
     return history.push("/coming-soon");
   };
 
   /* we populate our menu based on access_control_master in the DB */
   const items: MenuItem[] = [];
   items.push(generateHomeSettings());
+  items.push(getItem("List Tagless Incident", "tagless-list", <i className="icon icon-product-list" />));
+  items.push(generateGeneralSettings());
 
   return (
     <>
       {/* hamburger icon */}
-      <SidebarLogo
-        sidebarCollapsed={sidebarCollapsed}
-        setSidebarCollapsed={setSidebarCollapsed}
-      />
+      <SidebarLogo sidebarCollapsed={sidebarCollapsed} setSidebarCollapsed={setSidebarCollapsed} />
       {/* custom scrollbar when window height is small */}
       {/* <CustomScrollbars className="gx-layout-sider-scrollbar"> */}
-      <Menu
-        onClick={handleOnClick}
-        style={{ paddingTop: "10px" }}
-        defaultOpenKeys={[defaultOpenKeys]}
-        defaultSelectedKeys={[selectedKeys]}
-        theme={themeType === THEME_TYPE_LITE ? "light" : "dark"}
-        mode="inline"
-        items={items}
-      ></Menu>
+      <Menu onClick={handleOnClick} style={{ paddingTop: "10px" }} defaultOpenKeys={[defaultOpenKeys!]} defaultSelectedKeys={[selectedKeys!]} theme={themeType === THEME_TYPE_LITE ? "light" : "dark"} mode="inline" items={items}></Menu>
       {/* </CustomScrollbars> */}
     </>
   );

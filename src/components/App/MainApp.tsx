@@ -4,16 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import App from "../../routes/index";
 import Topbar from "../Topbar";
 import AppSidebar from "./AppSidebar";
-import {
-  NAV_STYLE_ABOVE_HEADER,
-  NAV_STYLE_BELOW_HEADER,
-  NAV_STYLE_DARK_HORIZONTAL,
-  NAV_STYLE_DEFAULT_HORIZONTAL,
-  NAV_STYLE_DRAWER,
-  NAV_STYLE_FIXED,
-  NAV_STYLE_INSIDE_HEADER_HORIZONTAL,
-  NAV_STYLE_MINI_SIDEBAR,
-} from "../../constants/ThemeSetting";
+import { NAV_STYLE_ABOVE_HEADER, NAV_STYLE_BELOW_HEADER, NAV_STYLE_DARK_HORIZONTAL, NAV_STYLE_DEFAULT_HORIZONTAL, NAV_STYLE_DRAWER, NAV_STYLE_FIXED, NAV_STYLE_INSIDE_HEADER_HORIZONTAL, NAV_STYLE_MINI_SIDEBAR } from "../../constants/ThemeSetting";
 import { updateWindowWidth } from "../../appRedux/actions";
 import type { RootState } from "../../appRedux/store";
 
@@ -69,16 +60,13 @@ const MainApp = () => {
         <AppSidebar navStyle={navStyle} />
         <Layout>
           {getNavStyles(navStyle)}
-          <Content
-            className={`gx-layout-content ${getContainerClass(navStyle)} `}
-          >
+          <Content className={`gx-layout-content ${getContainerClass(navStyle)} `}>
             <App />
             <Footer>
               <div className="gx-layout-footer-content">
                 {/* get year from current year(YYYY) - next year (YY) */}
                 <div>
-                  © abc Limited. {new Date().getFullYear()}-
-                  {(new Date().getFullYear() + 1).toString().slice(2)}
+                  © Adani Airports Limited. {new Date().getFullYear()}-{(new Date().getFullYear() + 1).toString().slice(2)}
                 </div>
               </div>
             </Footer>

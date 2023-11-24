@@ -1,8 +1,5 @@
-import {
-  TOGGLE_COLLAPSED_NAV,
-  WINDOW_WIDTH,
-} from "../../constants/ActionTypes";
-import { AnyAction } from "redux";
+import { TOGGLE_COLLAPSED_NAV, WINDOW_WIDTH } from "../../constants/ActionTypes";
+import type { AnyAction, Reducer } from "redux";
 
 type CommonReducerState = {
   navCollapsed: boolean;
@@ -10,34 +7,37 @@ type CommonReducerState = {
   pathname: string;
 };
 
-const INIT_STATE: CommonReducerState = {
-  navCollapsed: false,
+const INIT_STATE = {
+  navCollapsed: true,
   width: window.innerWidth,
-  pathname: "/",
+  pathname: "/"
 };
 
-const CommonReducer = (state = INIT_STATE, action: AnyAction) => {
+const CommonReducer: Reducer<CommonReducerState, AnyAction> = (state = INIT_STATE, action) => {
   switch (action.type) {
     case "@@router/LOCATION_CHANGE": {
       return {
         ...state,
         pathname: action.payload.location.pathname,
+        navCollapsed: false
       };
     }
-    case WINDOW_WIDTH: {
+
+    case WINDOW_WIDTH:
       const width: number = action.width;
       return {
         ...state,
-        width: width,
+        width: width
       };
-    }
+
     case TOGGLE_COLLAPSED_NAV: {
       const navCollapsed: boolean = action.navCollapsed;
       return {
         ...state,
-        navCollapsed: navCollapsed,
+        navCollapsed: navCollapsed
       };
     }
+
     default:
       return state;
   }

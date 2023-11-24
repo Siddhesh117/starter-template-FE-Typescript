@@ -1,15 +1,5 @@
-import {
-  SWITCH_LANGUAGE,
-  TOGGLE_COLLAPSED_NAV,
-  WINDOW_WIDTH,
-} from "../../constants/ActionTypes";
-import {
-  LAYOUT_TYPE,
-  NAV_STYLE,
-  THEME_COLOR,
-  THEME_TYPE,
-  UPDATE_RTL_STATUS,
-} from "../../constants/ThemeSetting";
+import { SWITCH_LANGUAGE, TOGGLE_COLLAPSED_NAV, WINDOW_WIDTH } from "../../constants/ActionTypes";
+import { LAYOUT_TYPE, NAV_STYLE, THEME_COLOR, THEME_TYPE, UPDATE_RTL_STATUS } from "../../constants/ThemeSetting";
 import type { Dispatch } from "redux";
 
 export function toggleCollapsedSideNav(navCollapsed: boolean) {
@@ -56,7 +46,7 @@ export function switchLanguage(locale: any) {
   return (dispatch: Dispatch) => {
     dispatch({
       type: SWITCH_LANGUAGE,
-      payload: locale,
+      payload: locale
     });
   };
 }

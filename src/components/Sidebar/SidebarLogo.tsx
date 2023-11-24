@@ -1,13 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Dispatch, SetStateAction } from "react";
-import {
-  NAV_STYLE_FIXED,
-  NAV_STYLE_MINI_SIDEBAR,
-  THEME_TYPE_LITE,
-  NAV_STYLE_DRAWER,
-  TAB_SIZE,
-} from "../../constants/ThemeSetting";
+import { NAV_STYLE_FIXED, NAV_STYLE_MINI_SIDEBAR, THEME_TYPE_LITE, NAV_STYLE_NO_HEADER_MINI_SIDEBAR, NAV_STYLE_DRAWER, TAB_SIZE } from "../../constants/ThemeSetting";
 import type { RootState } from "../../appRedux/store";
+import adani_logo from "../../assets/pictures/adani_logo.png";
 import { toggleCollapsedSideNav } from "../../appRedux/actions";
 
 type SidebarLogoProps = {
@@ -15,10 +10,7 @@ type SidebarLogoProps = {
   setSidebarCollapsed: Dispatch<SetStateAction<boolean>>;
 };
 
-const SidebarLogo = ({
-  sidebarCollapsed,
-  setSidebarCollapsed,
-}: SidebarLogoProps) => {
+const SidebarLogo = ({ sidebarCollapsed, setSidebarCollapsed }: SidebarLogoProps) => {
   const { themeType } = useSelector(({ settings }: RootState) => settings);
   const { width } = useSelector(({ common }: RootState) => common);
   const { navCollapsed } = useSelector(({ common }: RootState) => common);
@@ -39,9 +31,7 @@ const SidebarLogo = ({
       {navStyle === NAV_STYLE_FIXED || navStyle === NAV_STYLE_MINI_SIDEBAR ? (
         <div className="gx-linebar">
           <i
-            className={`gx-icon-btn icon icon-menu  icon-${
-              !sidebarCollapsed ? "menu-unfold" : "menu-fold"
-            } ${themeType !== THEME_TYPE_LITE ? "gx-text-white" : ""}`}
+            className={`gx-icon-btn icon icon-menu  icon-${!sidebarCollapsed ? "menu-unfold" : "menu-fold"} ${themeType !== THEME_TYPE_LITE ? "gx-text-white" : ""}`}
             onClick={() => {
               hideLogoFunction();
             }}
@@ -52,7 +42,7 @@ const SidebarLogo = ({
         </div>
       ) : null}
 
-      {/* <span className="gx-site-logo">
+      <span className="gx-site-logo">
         {navCollapsed && navStyle === NAV_STYLE_NO_HEADER_MINI_SIDEBAR && width >= TAB_SIZE ? (
           ""
         ) : (
@@ -65,7 +55,7 @@ const SidebarLogo = ({
             }}
           />
         )}
-      </span> */}
+      </span>
     </div>
   );
 };

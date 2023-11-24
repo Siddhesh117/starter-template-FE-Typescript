@@ -27,8 +27,8 @@ const initialSettings = {
     languageId: "english",
     locale: "en",
     name: "English",
-    icon: "us"
-  }
+    icon: "us",
+  },
 };
 
 const SettingsReducer: Reducer<SettingsReducerState, AnyAction> = (state = initialSettings, action) => {
@@ -37,38 +37,38 @@ const SettingsReducer: Reducer<SettingsReducerState, AnyAction> = (state = initi
       const themeType: string = action.themeType;
       return {
         ...state,
-        themeType: themeType
+        themeType: themeType,
       };
     case THEME_COLOR:
       const themeColor: string = action.themeColor;
       return {
         ...state,
-        themeColor: themeColor
+        themeColor: themeColor,
       };
 
     case UPDATE_RTL_STATUS:
       const isDirectionRTL: boolean = action.rtlStatus;
       return {
         ...state,
-        isDirectionRTL: isDirectionRTL
+        isDirectionRTL: isDirectionRTL,
       };
     case NAV_STYLE:
       const navStyle: string = action.navStyle;
       return {
         ...state,
-        navStyle: navStyle
+        navStyle: navStyle,
       };
     case LAYOUT_TYPE:
       const layoutType: string = action.layoutType;
       return {
         ...state,
-        layoutType: layoutType
+        layoutType: layoutType,
       };
     case SWITCH_LANGUAGE:
       const locale: { languageId: string; locale: string; name: string; icon: string } = action.payload;
       return {
         ...state,
-        locale: locale
+        locale: locale,
       };
     default:
       return state;
